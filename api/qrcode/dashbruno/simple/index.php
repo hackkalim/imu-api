@@ -439,7 +439,7 @@ function saveToDatabase(qrValue) {
     // Debug: Log what we're sending
     console.log("Sending to save_qr.php:");
     console.log("- qrcode:", qrValue);
-    console.log("- price:", priceValue);\
+    console.log("- price:", priceValue);
     
     // Build the parameter string
     const params = "qrcode=" + encodeURIComponent(qrValue) + 
@@ -684,5 +684,6 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
 
 
