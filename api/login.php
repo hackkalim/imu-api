@@ -1,11 +1,8 @@
 <?php
-// Enable error reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// Enable error logging but don't display to output
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 error_reporting(E_ALL);
-
-// Log that the script was accessed
-error_log("===== login.php accessed =====");
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -19,27 +16,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 try {
-    // Test database connection first
     require_once 'db_config.php';
-    error_log("Database connection successful");
     
-    // Simple test response
-    echo json_encode([
-        'success' => true,
-        'message' => 'Login API is working',
-        'data' => [
-            'user_id' => 1,
-            'username' => 'test',
-            'session_token' => 'test_token_123'
-        ]
-    ]);
+    // Get POST data
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    if (!isset($input['username']) || !isset($input['password'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Username and password required'
+        ]);
+        exit();
+    }
+    
+    $username = $conn->real_escape_string($input['username']);
+    $password = $input['password'];
+    
+    // Query user from simple_users table
+    $sql = "SELECT id, username, password FROM simple_users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        // Verify password
+        if (password_verify($password, $row['password'])) {
+            // Generate session token
+            $session_token = bin2hex(random_bytes(32));
+            
+            echo json_encode([
+                'success' => true,
+                'message' => 'Login successful',
+                'data' => [
+                    'user_id' => $row['id'],
+                    'username' => $row['username'],
+                    'session_token' => $session_token
+                ]
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Invalid password'
+            ]);
+        }
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'User not found'
+        ]);
+    }
     
 } catch (Exception $e) {
-    error_log("ERROR: " . $e->getMessage());
+    error_log('Login error: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Server error: ' . $e->getMessage()
+        'message' => 'Server error occurred'
     ]);
 }
+
+$conn->close();
 ?>
