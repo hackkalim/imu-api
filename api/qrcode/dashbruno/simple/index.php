@@ -431,15 +431,42 @@ button, .nav-link {
 
     // --- UPDATED AJAX MANAGEMENT LOGIC ---
 function saveToDatabase(qrValue) {
-    // 1. Get the price from your input field
+    // Get values from form
     const priceValue = document.getElementById('ticketPrice').value;
-
+    
+    // Debug: Log what we're sending
+    console.log("Sending to save_qr.php:");
+    console.log("- qrcode:", qrValue);
+    console.log("- price:", priceValue);\
+    
+    // Build the parameter string
+    const params = "qrcode=" + encodeURIComponent(qrValue) + 
+                   "&price=" + encodeURIComponent(priceValue);
+    
+    console.log("Full params string:", params);
+    
+    // Send the request
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://imu-api-ic2r.onrender.com/save_qr.php", true);
+    xhr.open("POST", "/save_qr.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
-    // 2. Send BOTH qrcode and price
-    xhr.send("qrcode=" + qrValue + "&price=" + encodeURIComponent(priceValue));
+    xhr.onload = function() {
+        console.log("Response status:", this.status);
+        console.log("Response text:", this.responseText);
+        
+        if (this.status === 200) {
+            document.getElementById('status-msg').innerText = "✓ Saved: " + this.responseText;
+        } else {
+            document.getElementById('status-msg').innerText = "❌ Error: " + this.responseText;
+        }
+    };
+    
+    xhr.onerror = function() {
+        console.error("Network error");
+        document.getElementById('status-msg').innerText = "❌ Network error";
+    };
+    
+    xhr.send(params);
 }
 
 
@@ -653,3 +680,4 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
