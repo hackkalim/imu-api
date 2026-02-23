@@ -379,8 +379,6 @@ button, .nav-link {
         const file = document.getElementById('imageInput').files[0];
         totalNeeded = parseInt(document.getElementById('duplicateCount').value);
 
-
-        const file = document.getElementById('imageInput').files[0];
     totalNeeded = parseInt(document.getElementById('duplicateCount').value);
     const priceValue = document.getElementById('ticketPrice').value;
     
@@ -708,6 +706,7 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
 
 
 
