@@ -11,7 +11,7 @@ error_log("POST data: " . print_r($_POST, true));
 require_once 'db_config.php';
 
 // Check if ALL required parameters are set
-$required_params = ['qrcode', 'price', 'tier'];
+$required_params = ['qrcode', 'price'];
 $missing_params = [];
 
 foreach ($required_params as $param) {
@@ -31,25 +31,12 @@ if (!empty($missing_params)) {
 // Get and sanitize values
 $qr = $conn->real_escape_string($_POST['qrcode']);
 $price = $conn->real_escape_string($_POST['price']);
-$tier = $conn->real_escape_string($_POST['tier']);
 
 error_log("Processing - QR: $qr, Price: $price, Tier: $tier");
 
 // Determine which table and column to use based on tier
-$table = '';
-$qr_column = '';
-
-if ($tier === 'vip') {
-    $table = 'qrcodevip';
-    $qr_column = 'qrcodevip';
-} elseif ($tier === 'vvip') {
-    $table = 'qrcodevvip';
-    $qr_column = 'qrcodevvip';
-} else {
-    // Default to simple
-    $table = 'qrcodegenerate';
-    $qr_column = 'qrcodegenerate';
-}
+$table = 'qrcodegenerate';
+$qr_column = 'qrcodegenerate';
 
 error_log("Target table: $table, column: $qr_column");
 
@@ -80,3 +67,4 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
+
