@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: imu-api
+    runtime: php
+    region: frankfurt
+    plan: free
+    buildCommand: composer install
+    startCommand: php -S 0.0.0.0:$PORT -t api
+    envVars:
+      - key: DB_HOST
+        value: sql204.infinityfree.com
+      - key: DB_USER
+        value: if0_41188377
+      - key: DB_PASSWORD
+        value: jrP3XVBEjDQBq8S
+      - key: DB_NAME
+        value: if0_41188377_qrcodegenerate
