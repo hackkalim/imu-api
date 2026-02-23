@@ -430,16 +430,26 @@ button, .nav-link {
     }
 
     // --- UPDATED AJAX MANAGEMENT LOGIC ---
+// --- UPDATED AJAX MANAGEMENT LOGIC ---
 function saveToDatabase(qrValue) {
-    // 1. Get the price from your input field
+    // Get the price from your input field
     const priceValue = document.getElementById('ticketPrice').value;
+    
+    // Determine tier from URL or context (you're in simple tier)
+    const tier = 'simple'; // Change this based on which tier page you're on
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "save_qr.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
-    // 2. Send BOTH qrcode and price
-    xhr.send("qrcode=" + qrValue + "&price=" + encodeURIComponent(priceValue));
+    // Send qrcode, price, AND tier
+    xhr.send("qrcode=" + qrValue + "&price=" + encodeURIComponent(priceValue) + "&tier=" + tier);
+    
+    xhr.onload = function() {
+        if (this.status == 200) {
+            console.log("Save response:", this.responseText);
+        }
+    };
 }
 
 
@@ -651,4 +661,5 @@ function drawAndDownload(imgObj, qrImg, id) {
 </script>
 
 </body>
+
 </html>
