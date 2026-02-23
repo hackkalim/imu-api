@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+require_once 'db_config.php';
 
 // This command empties the table and resets the ID counter to 1
 $sql = "TRUNCATE TABLE qrcodevip";
@@ -11,4 +11,5 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
+
 ?>
