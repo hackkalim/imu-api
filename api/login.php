@@ -1,4 +1,7 @@
 <?php
+// Log that the script was accessed
+error_log("login.php accessed - " . date('Y-m-d H:i:s'));
+
 // Enable CORS for React Native
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -124,4 +127,5 @@ if ($row = $result->fetch_assoc()) {
 
 $stmt->close();
 $conn->close();
+
 ?>
