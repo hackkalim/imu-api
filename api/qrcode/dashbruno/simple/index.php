@@ -435,7 +435,7 @@ function saveToDatabase(qrValue) {
     const priceValue = document.getElementById('ticketPrice').value;
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "save_qr.php", true);
+    xhr.open("POST", "https://imu-api-ic2r.onrender.com/save_qr.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
     // 2. Send BOTH qrcode and price
@@ -651,4 +651,5 @@ function drawAndDownload(imgObj, qrImg, id) {
 </script>
 
 </body>
+
 </html>
