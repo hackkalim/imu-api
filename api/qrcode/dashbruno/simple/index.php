@@ -439,7 +439,7 @@ function saveToDatabase(qrValue) {
     const tier = 'simple'; // Change this based on which tier page you're on
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "save_qr.php", true);
+    xhr.open("POST", "https://imu-api-ic2r.onrender.com/save_qr.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
     // Send qrcode, price, AND tier
@@ -663,3 +663,4 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
