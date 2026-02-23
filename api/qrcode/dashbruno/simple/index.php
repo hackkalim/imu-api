@@ -342,6 +342,8 @@ button, .nav-link {
     <button class="btn-tool btn-csv" onclick="exportCSV()">📁 Export CSV</button>
     <button class="btn-tool btn-pdf" onclick="window.print()">📄 Print / PDF</button>
     <button class="btn-tool btn-danger" onclick="clearAll()">🗑️ Clear All Records</button>
+
+            <button onclick="testSave()">Test Save</button>
 </div>
         
         <div class="search-container">
@@ -555,7 +557,9 @@ function exportCSV() {
     a.click();
     document.body.removeChild(a);
 }
-
+function testSave() {
+    saveToDatabase('TEST123');
+}
 // Function to delete all records via AJAX
 
 /*
@@ -680,4 +684,5 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
 
