@@ -378,6 +378,24 @@ button, .nav-link {
     async function startGeneration() {
         const file = document.getElementById('imageInput').files[0];
         totalNeeded = parseInt(document.getElementById('duplicateCount').value);
+
+
+        const file = document.getElementById('imageInput').files[0];
+    totalNeeded = parseInt(document.getElementById('duplicateCount').value);
+    const priceValue = document.getElementById('ticketPrice').value;
+    
+    // VALIDATION: Check if price is empty
+    if (!priceValue || priceValue.trim() === '') {
+        alert('Please enter a price before generating QR codes!');
+        document.getElementById('ticketPrice').focus();
+        return;
+    }
+    
+    if (!file || !totalNeeded) {
+        alert("Please select an image and quantity.");
+        return;
+    }
+        
         
         if (!file || !totalNeeded) {
             alert("Please select an image and quantity.");
@@ -690,6 +708,7 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
 
 
 
