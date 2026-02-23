@@ -1,8 +1,5 @@
 <?php
-// Enable error reporting for debugging (remove after fixing)
-ini_set('display_errors', 0); // Don't display to output
-ini_set('log_errors', 1);      // Log to error log
-error_reporting(E_ALL);
+error_log("===== db_config.php loaded =====");
 
 // Get database credentials from environment variables
 $server = getenv('DB_HOST');
@@ -10,9 +7,13 @@ $username = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 $dbname = getenv('DB_NAME');
 
-// Check if all environment variables are set
+error_log("DB_HOST: " . ($server ?: 'NOT SET'));
+error_log("DB_USER: " . ($username ?: 'NOT SET'));
+error_log("DB_PASSWORD: " . ($password ? '********' : 'NOT SET'));
+error_log("DB_NAME: " . ($dbname ?: 'NOT SET'));
+
 if (!$server || !$username || !$password || !$dbname) {
-    error_log("Database environment variables missing");
+    error_log("ERROR: Database environment variables missing");
     header('Content-Type: application/json');
     http_response_code(500);
     die(json_encode([
@@ -33,5 +34,6 @@ if ($conn->connect_error) {
     ]));
 }
 
+error_log("Database connected successfully");
 $conn->set_charset("utf8");
 ?>
