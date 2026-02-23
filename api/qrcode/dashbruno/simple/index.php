@@ -328,7 +328,8 @@ button, .nav-link {
 
     <div class="field">
     <label>4. Ticket Price ($)</label>
-    <input type="number" id="ticketPrice" placeholder="Enter amount (e.g. 50)" value="" name="price">
+    <input type="number" id="ticketPrice" placeholder="Enter amount (e.g. 50)" value="50" name="price">
+    <!-- Add a default value like value="50" -->
 </div>
 
     <button class="btn-main" onclick="startGeneration()">Generate & Download</button>
@@ -433,21 +434,26 @@ button, .nav-link {
 
     // --- UPDATED AJAX MANAGEMENT LOGIC ---
 function saveToDatabase(qrValue) {
-    // Get values from form
+    // Get the price from your input field
     const priceValue = document.getElementById('ticketPrice').value;
     
-    // Debug: Log what we're sending
+    // VALIDATION: Check if price is empty
+    if (!priceValue || priceValue.trim() === '') {
+        alert('Please enter a price before generating QR codes!');
+        document.getElementById('status-msg').innerText = '❌ Price is required';
+        document.getElementById('ticketPrice').focus();
+        return; // Stop the function here
+    }
+    
     console.log("Sending to save_qr.php:");
     console.log("- qrcode:", qrValue);
     console.log("- price:", priceValue);
     
-    // Build the parameter string
     const params = "qrcode=" + encodeURIComponent(qrValue) + 
                    "&price=" + encodeURIComponent(priceValue);
     
     console.log("Full params string:", params);
     
-    // Send the request
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/save_qr.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -684,6 +690,7 @@ function drawAndDownload(imgObj, qrImg, id) {
 </body>
 
 </html>
+
 
 
 
