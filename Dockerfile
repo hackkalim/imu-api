@@ -1,19 +1,25 @@
 FROM php:8.2-apache
 
-# Install mysqli extension (required for your database)
+# Install mysqli extension
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
-# Enable Apache mod_rewrite (useful for clean URLs)
+# Enable Apache modules
 RUN a2enmod rewrite
+
+# Enable PHP error logging to stdout
+RUN echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/error-logging.ini
+RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/error-logging.ini
+RUN echo "display_errors = Off" >> /usr/local/etc/php/conf.d/error-logging.ini
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy your application files to the container
+# Copy your application files
 COPY api/ /var/www/html/
 
-# Ensure Apache uses the api directory as root
-RUN sed -i 's|/var/www/html|/var/www/html|g' /etc/apache2/sites-available/000-default.conf
+# Ensure Apache logs to stdout/stderr for Render logs
+RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
+    ln -sf /dev/stderr /var/log/apache2/error.log
 
 # Expose port 80
 EXPOSE 80
