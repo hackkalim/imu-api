@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+require_once 'db_config.php';
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
@@ -11,4 +11,5 @@ if (isset($_POST['id'])) {
         echo "error";
     }
 }
+
 ?>
