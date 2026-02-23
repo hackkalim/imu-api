@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "qrcodegenerate";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'db_config.php';
 
 // Check if BOTH qrcode and price are set
 if (isset($_POST['qrcode']) && isset($_POST['price'])) {
@@ -27,4 +18,5 @@ if (isset($_POST['qrcode']) && isset($_POST['price'])) {
 }
 
 $conn->close();
+
 ?>
