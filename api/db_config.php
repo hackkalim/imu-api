@@ -1,19 +1,19 @@
 <?php
-error_log("===== db_config.php loaded =====");
+// Enable error logging
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
 
 // Get database credentials from environment variables
 $server = getenv('DB_HOST');
 $username = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 $dbname = getenv('DB_NAME');
+$port = getenv('DB_PORT') ?: 4000; // TiDB uses port 4000
 
-error_log("DB_HOST: " . ($server ?: 'NOT SET'));
-error_log("DB_USER: " . ($username ?: 'NOT SET'));
-error_log("DB_PASSWORD: " . ($password ? '********' : 'NOT SET'));
-error_log("DB_NAME: " . ($dbname ?: 'NOT SET'));
-
+// Verify all variables are set
 if (!$server || !$username || !$password || !$dbname) {
-    error_log("ERROR: Database environment variables missing");
+    error_log("Database environment variables missing");
     header('Content-Type: application/json');
     http_response_code(500);
     die(json_encode([
@@ -22,7 +22,19 @@ if (!$server || !$username || !$password || !$dbname) {
     ]));
 }
 
-$conn = new mysqli($server, $username, $password, $dbname);
+// For TiDB Cloud, we MUST use SSL
+$ssl_config = [
+    'ssl' => [
+        'verify_peer' => true,
+        'verify_peer_name' => true,
+        'allow_self_signed' => false
+    ]
+];
+
+// Create connection with SSL
+$conn = new mysqli();
+$conn->ssl_set(null, null, null, null, null);
+$conn->real_connect($server, $username, $password, $dbname, $port, null, MYSQLI_CLIENT_SSL);
 
 if ($conn->connect_error) {
     error_log("Database connection failed: " . $conn->connect_error);
@@ -30,10 +42,12 @@ if ($conn->connect_error) {
     http_response_code(500);
     die(json_encode([
         'success' => false,
-        'message' => 'Database connection failed'
+        'message' => 'Database connection failed: ' . $conn->connect_error
     ]));
 }
 
-error_log("Database connected successfully");
+// Set charset
 $conn->set_charset("utf8");
+
+error_log("Database connected successfully with SSL");
 ?>
