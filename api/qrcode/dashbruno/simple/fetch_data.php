@@ -1,10 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli("localhost", "root", "", "qrcodegenerate");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'db_config.php';
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
@@ -45,4 +41,5 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+
 ?>
