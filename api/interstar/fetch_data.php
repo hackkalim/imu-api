@@ -1,5 +1,5 @@
 <?php
-require_once 'db_config.php';
+include 'db_config.php';
 
 // Get tier and mode from AJAX request
 $tier = $_GET['tier'] ?? 'simple';
@@ -61,5 +61,4 @@ if ($result && $result->num_rows > 0) {
     $colspan = ($mode === 'full') ? 5 : 4;
     echo "<tr><td colspan='$colspan' style='text-align:center'>No records found in $table</td></tr>";
 }
-
 ?>
