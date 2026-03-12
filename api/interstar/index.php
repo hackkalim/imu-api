@@ -749,7 +749,7 @@
     function loadHomeData() {
         // 1. Update the Financial Summary Table (Table 1)
         const xhrSummary = new XMLHttpRequest();
-        xhrSummary.open("GET", "get_summary.php", true);
+        xhrSummary.open("GET", "get_summarytwo.php", true);
         xhrSummary.onload = function() {
             if(this.status == 200) {
                 document.getElementById('summaryBody').innerHTML = this.responseText;
@@ -1258,4 +1258,5 @@ function printReport() {
     }, 3000);
 </script>
 </body>
+
 </html>
