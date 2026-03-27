@@ -415,23 +415,6 @@
     <!-- Home Tab -->
     <div id="home" class="tab-content active">
         <!-- Quick Access Links -->
-        <div class="quick-links">
-            <a href="simple/index.php" class="quick-card simple">
-                <i class="fas fa-ticket-alt"></i>
-                <h3>Simple QR</h3>
-                <p>C0 - C9 Categories</p>
-            </a>
-            <a href="vip/index.php" class="quick-card vip">
-                <i class="fas fa-crown"></i>
-                <h3>VIP QR</h3>
-                <p>V0 - V9 Categories</p>
-            </a>
-            <a href="vvip/index.php" class="quick-card vvip">
-                <i class="fas fa-gem"></i>
-                <h3>VVIP QR</h3>
-                <p>W0 - W9 Categories</p>
-            </a>
-        </div>
 
         <!-- Sales Summary Panel -->
         <div class="panel">
