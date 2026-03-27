@@ -1,26 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-$timeout_duration = 1800;
-
-if (isset($_SESSION['last_activity'])) {
-    $elapsed_time = time() - $_SESSION['last_activity'];
-    if ($elapsed_time > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        header("Location: ../login.php?timeout=1");
-        exit();
-    }
-}
-
-$_SESSION['last_activity'] = time();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
