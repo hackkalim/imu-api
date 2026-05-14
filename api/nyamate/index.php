@@ -1,26 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-$timeout_duration = 1800;
-
-if (isset($_SESSION['last_activity'])) {
-    $elapsed_time = time() - $_SESSION['last_activity'];
-    if ($elapsed_time > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        header("Location: ../login.php?timeout=1");
-        exit();
-    }
-}
-
-$_SESSION['last_activity'] = time();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -467,13 +444,6 @@ $_SESSION['last_activity'] = time();
         <nav>
             <ul class="nav-links">
                 <a href="index.php"><li class="active"><i class="fas fa-home"></i> Home</li></a>
-                <a href="simple/index.php"><li><i class="fas fa-ticket-alt"></i> Simple</li></a>
-                <a href="vip/index.php"><li><i class="fas fa-crown"></i> VIP</li></a>
-                <a href="vvip/index.php"><li><i class="fas fa-gem"></i> VVIP</li></a>
-                <a href="print.php"><li><i class="fas fa-print"></i> Print</li></a>
-                <a href="csv.php"><li><i class="fas fa-file-csv"></i> CSV</li></a>
-                <a href="setting/settings.php"><li><i class="fas fa-cog"></i> Settings</li></a>
-                <a href="logout.php"><li><i class="fas fa-sign-out-alt"></i> Logout</li></a>
             </ul>
         </nav>
     </div>
@@ -481,25 +451,7 @@ $_SESSION['last_activity'] = time();
 
 <div class="container">
     <!-- Home Tab -->
-    <div id="home" class="tab-content active">
-        <!-- Quick Access Links -->
-        <div class="quick-links">
-            <a href="simple/index.php" class="quick-card simple">
-                <i class="fas fa-ticket-alt"></i>
-                <h3>Simple QR</h3>
-                <p>C0 - C9 Categories</p>
-            </a>
-            <a href="vip/index.php" class="quick-card vip">
-                <i class="fas fa-crown"></i>
-                <h3>VIP QR</h3>
-                <p>V0 - V9 Categories</p>
-            </a>
-            <a href="vvip/index.php" class="quick-card vvip">
-                <i class="fas fa-gem"></i>
-                <h3>VVIP QR</h3>
-                <p>W0 - W9 Categories</p>
-            </a>
-        </div>
+    
 
         <!-- Sales Summary Panel -->
         <div class="panel">
