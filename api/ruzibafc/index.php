@@ -441,11 +441,7 @@
             <i class="fas fa-qrcode"></i>
             IMU<span> QR</span>
         </div>
-        <nav>
-            <ul class="nav-links">
-                <a href="index.php"><li class="active"><i class="fas fa-home"></i> Home</li></a>
-            </ul>
-        </nav>
+        <p>Created by Odon Bruno and Mr Moses</p>
     </div>
 </header>
 
@@ -461,9 +457,6 @@
             <div class="action-buttons">
                 <button class="btn-tool btn-primary" onclick="printReport()">
                     <i class="fas fa-print"></i> Print Report
-                </button>
-                <button class="btn-tool btn-danger" onclick="resetAllData()">
-                    <i class="fas fa-trash-alt"></i> Reset All Data
                 </button>
             </div>
             <div class="table-responsive">
