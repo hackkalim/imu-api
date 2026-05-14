@@ -28,7 +28,7 @@ if (empty($qr_code)) {
 $table = '';
 $qr_column = '';
 
-if (strpos($qr_code, 'V0-') === 0) {
+if (strpos($qr_code, 'V0_1-') === 0) {
     $table = 'qrcodevip';
     $qr_column = 'qrcodevip';
 } elseif (strpos($qr_code, 'C2-') === 0) {
@@ -37,7 +37,7 @@ if (strpos($qr_code, 'V0-') === 0) {
 } elseif (strpos($qr_code, 'C1-') === 0) {
     $table = 'qrcodegeneratec1';
     $qr_column = 'qrcodegenerate';
-} elseif (strpos($qr_code, 'C0-') === 0) {
+} elseif (strpos($qr_code, 'C0_1-') === 0) {
     $table = 'qrcodegenerate';
     $qr_column = 'qrcodegenerate';
 } elseif (strpos($qr_code, 'W0-') === 0) {
