@@ -484,7 +484,7 @@ $totalRevenue = $grandTotals['total_verified_cash'] + $grandTotals['total_pendin
                             ?>/<?php echo count($tier['main_categories']); ?> active)
                         </span>
                     </td>
-                    <td class="stat-number" style="color: <?php echo $tier['color']; ?>;"><?php echo number_format($tier['totals']['total_generated']); ?></td>
+                    <td class="stat-number" style="color: <?php echo $tier['color']; ?>;">600</td>
                     <td>-</td>
                     <td class="verified-text"><?php echo number_format($tier['totals']['total_verified_qty']); ?></td>
                     <td class="verified-text"><?php echo number_format($tier['totals']['total_verified_cash']); ?> Fbu</td>
