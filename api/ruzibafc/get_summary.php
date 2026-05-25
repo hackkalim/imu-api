@@ -525,7 +525,7 @@ $totalRevenue = $grandTotals['total_verified_cash'] + $grandTotals['total_pendin
                                 <span class="badge-active"><?php echo $activeSubCount; ?>/5 active</span>
                             <?php endif; ?>
                         </td>
-                        <td class="stat-number"><?php echo number_format($mainCat['totals']['total_generated']); ?></td>
+                        <td class="stat-number">600</td>
                         <td>-</td>
                         <td class="verified-text"><?php echo number_format($mainCat['totals']['total_verified_qty']); ?></td>
                         <td class="verified-text"><?php echo number_format($mainCat['totals']['total_verified_cash']); ?> Fbu</td>
