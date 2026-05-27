@@ -565,7 +565,7 @@ $totalRevenue = $grandTotals['total_verified_cash'] + $grandTotals['total_pendin
                                         <span class="badge-active">active</span>
                                     <?php endif; ?>
                                 </td>
-                                <td class="stat-number"><?php echo $subCat['has_data'] ? number_format($subCat['total']) : '0'; ?></td>
+                                <td class="stat-number">600</td>
                                 <td><?php echo $subCat['unit_price'] > 0 ? number_format($subCat['unit_price']) . ' Fbu' : '-'; ?></td>
                                 <td class="verified-text"><?php echo $subCat['has_data'] ? number_format($subCat['verified_qty']) : '0'; ?></td>
                                 <td class="verified-text"><?php echo $subCat['has_data'] && $subCat['verified_cash'] > 0 ? number_format($subCat['verified_cash']) . ' Fbu' : '0 Fbu'; ?></td>
@@ -607,7 +607,7 @@ $totalRevenue = $grandTotals['total_verified_cash'] + $grandTotals['total_pendin
                     <i class="fas fa-chart-pie" style="color: #FB8500; margin-right: 8px;"></i>
                     GRAND TOTAL
                 </td>
-                <td style="font-size: 18px; font-weight: 800; color: #FB8500;"><?php echo number_format($grandTotals['total_generated']); ?></td>
+                <td style="font-size: 18px; font-weight: 800; color: #FB8500;">900</td>
                 <td style="font-weight: 600;"><?php echo number_format($avgPrice); ?> Fbu</td>
                 <td style="font-size: 16px; font-weight: 800; color: #2d6a4f;"><?php echo number_format($grandTotals['total_verified_qty']); ?></td>
                 <td style="font-size: 14px; font-weight: 800; color: #2d6a4f;"><?php echo number_format($grandTotals['total_verified_cash']); ?> Fbu</td>
